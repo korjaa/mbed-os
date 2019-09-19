@@ -116,6 +116,14 @@ public:
     }
 
     /**
+     * Check whether wake timer is active and valid for current sleep locks
+     *
+     * Called from critical section
+     * @return true if the wake timer is active and valid.
+     */
+    bool wake_time_valid() const;
+
+    /**
      * Cancel any pending wake
      */
     void cancel_wake();
