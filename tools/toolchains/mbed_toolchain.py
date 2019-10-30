@@ -957,6 +957,14 @@ class mbedToolchain:
     def add_linker_defines(self):
         params, _ = self.config_data
 
+        if "target.OUTPUT_EXT" in params:
+            define_string = self.make_ld_define(
+                "MBED_CONF_TARGET_OUTPUT_EXT",
+                params["target.OUTPUT_EXT"].value
+            )
+            self.ld.append(define_string)
+            self.flags["ld"].append(define_string)
+
         if self.STACK_PARAM in params:
             define_string = self.make_ld_define(
                 "MBED_BOOT_STACK_SIZE",
